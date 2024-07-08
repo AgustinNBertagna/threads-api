@@ -5,6 +5,7 @@ import {
   fetchPost,
   fetchUserProfile,
   fetchUserPosts,
+  fetchRelatedPosts,
 } from "./utils/fetch";
 
 const app = new Elysia()
@@ -24,6 +25,9 @@ const app = new Elysia()
   )
   .get("/api/search", ({ query: { query, quantity } }) =>
     fetchSearch(query, quantity)
+  )
+  .get("api/relatedposts/:targetPostID", ({ params: { targetPostID } }) =>
+    fetchRelatedPosts(targetPostID)
   )
   .get("api/post/:postID", ({ params: { postID } }) => fetchPost(postID))
   .listen(3000);
