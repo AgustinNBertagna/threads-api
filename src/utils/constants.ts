@@ -14,6 +14,7 @@ export const DOCUMENTS_ID = {
   userProfileByName: "7608244852635754",
   userProfileByID: "7519946354721015",
   userPost: "7694029870651498",
+  userPostRelatedPosts: "7922331414476362",
   feed: "7442991059144077",
 };
 export const VARIABLES = {
