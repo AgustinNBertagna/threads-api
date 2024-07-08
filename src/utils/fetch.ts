@@ -73,3 +73,19 @@ export async function fetchUserPosts(userID: string = "", first: string = "") {
   });
   return response;
 }
+
+export async function fetchUserResponses(userID: string, first: string = "") {
+  const response = await baseFetch({
+    doc_id: DOCUMENTS_ID.userResponses,
+    variables: { userID, first },
+  });
+  return response;
+}
+
+export async function fetchUserReposts(userID: string, first: string = "") {
+  const response = await baseFetch({
+    doc_id: DOCUMENTS_ID.userReposts,
+    variables: { userID, first },
+  });
+  return response;
+}
