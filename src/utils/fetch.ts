@@ -39,6 +39,14 @@ export async function fetchPost(postID: string) {
   return response;
 }
 
+export async function fetchRelatedPosts(targetPostID: string) {
+  const response = await baseFetch({
+    doc_id: DOCUMENTS_ID.userPostRelatedPosts,
+    variables: { targetPostID },
+  });
+  return response;
+}
+
 export async function fetchFeed(
   specified_country: string = "US",
   first: string = "10"
