@@ -1,9 +1,10 @@
-import { usersDocs } from "../config/consts";
 import type {
   FetchUserOptions,
+  Section,
   fetchUserSearchOptions,
   fetchUserSectionOptions,
 } from "../types/usersTypes";
+import { Docs, DocsKeys } from "../types/threadsClientTypes";
 import threadsClient from "./threadsClient";
 
 export async function fetchUserSearch({
@@ -11,7 +12,7 @@ export async function fetchUserSearch({
   quantity,
 }: fetchUserSearchOptions) {
   const response = await threadsClient({
-    doc_id: usersDocs.searchUser,
+    doc_id: Docs.SEARCH_USER,
     query,
     first: quantity,
   });
@@ -22,10 +23,10 @@ export async function fetchUser(options: FetchUserOptions) {
   let response;
   if ("userID" in options) {
     const { userID } = options;
-    response = await threadsClient({ doc_id: usersDocs.userByID, userID });
+    response = await threadsClient({ doc_id: Docs.USER_BY_ID, userID });
   } else {
     const { username } = options;
-    response = await threadsClient({ doc_id: usersDocs.userByName, username });
+    response = await threadsClient({ doc_id: Docs.USER_BY_NAME, username });
   }
   return response;
 }
@@ -35,8 +36,10 @@ export async function fetchUserSection({
   userID,
   quantity,
 }: fetchUserSectionOptions) {
+  const key = `USER_${section.toUpperCase()}` as DocsKeys;
+  const doc_id = Docs[key];
   const response = await threadsClient({
-    doc_id: usersDocs[section],
+    doc_id,
     first: quantity,
     userID,
   });

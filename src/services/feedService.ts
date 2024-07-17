@@ -1,5 +1,5 @@
 import threadsClient from "./threadsClient";
-import { feedDocs } from "../config/consts";
+import { Docs } from "../types/threadsClientTypes";
 import type { FeedQuery } from "../types/feedTypes";
 
 export async function fetchFeed({
@@ -7,7 +7,7 @@ export async function fetchFeed({
   quantity: first,
 }: FeedQuery) {
   const response = await threadsClient({
-    doc_id: feedDocs.feed,
+    doc_id: Docs.FEED,
     specified_country,
     first,
   });
