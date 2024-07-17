@@ -25,16 +25,3 @@ export const defaultVariables = {
   query: "",
   first: "",
 };
-export const feedDocs = { feed: "7442991059144077" };
-export const usersDocs = {
-  searchUser: "7156716761073591",
-  userByName: "7608244852635754",
-  userByID: "7519946354721015",
-  posts: "7960125154039780",
-  responses: "7943510042395008",
-  reposts: "7865158943522605",
-};
-export const postsDocs = {
-  post: "7694029870651498",
-  relatedPosts: "7922331414476362",
-};
