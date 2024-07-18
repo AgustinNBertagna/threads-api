@@ -8,7 +8,7 @@ const params = t.Object({
 });
 
 const queries = t.Object({
-  query: t.String(),
+  query: t.String({ error: "Query is required" }),
   quantity: t.Optional(t.Numeric({ error: "Quantity must be a number" })),
 });
 
