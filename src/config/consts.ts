@@ -17,11 +17,4 @@ export const defaultVariables = {
     false,
   __relay_internal__pv__BarcelonaOptionalCookiesEnabledrelayprovider: true,
   __relay_internal__pv__BarcelonaIsSableEnabledrelayprovider: false,
-  username: "",
-  userID: "",
-  postID: "",
-  targetPostID: "",
-  specified_country: "",
-  query: "",
-  first: "",
 };
