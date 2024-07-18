@@ -1,6 +1,5 @@
 import type {
   FetchUserOptions,
-  Section,
   fetchUserSearchOptions,
   fetchUserSectionOptions,
 } from "../types/usersTypes";
@@ -14,7 +13,7 @@ export async function fetchUserSearch({
   const response = await threadsClient({
     doc_id: Docs.SEARCH_USER,
     query,
-    first: quantity,
+    first: quantity ?? "",
   });
   return response;
 }
