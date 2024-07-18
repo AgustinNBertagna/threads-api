@@ -33,7 +33,7 @@ interface RelatedPostsOptions {
 interface SearchUserOptions {
   doc_id: Docs.SEARCH_USER;
   query: string;
-  first?: number;
+  first?: number | string;
 }
 
 interface UserByNameOptions {
