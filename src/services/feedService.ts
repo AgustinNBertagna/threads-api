@@ -5,10 +5,9 @@ import type { FeedResponse } from "../types/threadsResponses/feedResponseTypes";
 
 function transformResponse(response: FeedResponse) {
   const edges = response.data.feedData.edges;
-  const posts = edges.map((threadItem) => {
-    const post = threadItem.text_post_app_thread.thread_items[0].post;
-    return post;
-  });
+  const posts = edges.map(
+    (edge) => edge.text_post_app_thread.thread_items[0].post
+  );
   return posts;
 }
 
