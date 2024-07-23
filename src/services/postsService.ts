@@ -2,20 +2,10 @@ import threadsClient from "./threadsClient";
 import { Docs } from "../types/threadsClientTypes";
 import type { PostsParams } from "../types/postsTypes";
 import type { PostResponse } from "../types/threadsResponses/postTypes";
-import type { RelatedPostsResponse } from "../types/threadsResponses/relatedPostsTypes";
-
-function transformPostResponse(response: PostResponse) {
-  const edges = response.data.data.edges;
-  const post = edges.splice(0, 1)[0].node.thread_items[0].post;
-  const replies = edges.map((edge) => edge.node.thread_items[0].post);
-  return { post, replies };
-}
-
-function transformRelatedPostsResponse(response: RelatedPostsResponse) {
-  const threads = response.data.relatedPosts.threads;
-  const posts = threads.map((thread) => thread.thread_items[0].post);
-  return posts;
-}
+import {
+  transformPostResponse,
+  transformRelatedPostsResponse,
+} from "./transformResponse";
 
 export async function fetchPost({ postID }: PostsParams) {
   const response: PostResponse = await threadsClient({

@@ -1,15 +1,8 @@
 import threadsClient from "./threadsClient";
 import { Docs } from "../types/threadsClientTypes";
+import { transformFeedResponse } from "./transformResponse";
 import type { FeedQuery } from "../types/feedTypes";
 import type { FeedResponse } from "../types/threadsResponses/feedTypes";
-
-function transformResponse(response: FeedResponse) {
-  const edges = response.data.feedData.edges;
-  const posts = edges.map(
-    (edge) => edge.text_post_app_thread.thread_items[0].post
-  );
-  return posts;
-}
 
 export async function fetchFeed({
   country: specified_country,
@@ -20,5 +13,5 @@ export async function fetchFeed({
     specified_country,
     first,
   });
-  return transformResponse(response);
+  return transformFeedResponse(response);
 }

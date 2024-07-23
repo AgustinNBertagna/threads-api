@@ -1,10 +1,17 @@
+import threadsClient from "./threadsClient";
+import {
+  transformSearchUserResponse,
+  transformUserPostsResponse,
+  transformUserRepostsResponse,
+  transformUserResponse,
+  transformUserResponsesResponse,
+} from "./transformResponse";
+import { Docs, DocsKeys } from "../types/threadsClientTypes";
 import type {
   FetchUserOptions,
   fetchUserSearchOptions,
   fetchUserSectionOptions,
 } from "../types/usersTypes";
-import { Docs, DocsKeys } from "../types/threadsClientTypes";
-import threadsClient from "./threadsClient";
 
 export async function fetchUserSearch({
   query,
@@ -15,7 +22,7 @@ export async function fetchUserSearch({
     query,
     first: quantity ?? "",
   });
-  return response;
+  return transformSearchUserResponse(response);
 }
 
 export async function fetchUser(options: FetchUserOptions) {
@@ -27,7 +34,7 @@ export async function fetchUser(options: FetchUserOptions) {
     const { username } = options;
     response = await threadsClient({ doc_id: Docs.USER_BY_NAME, username });
   }
-  return response;
+  return transformUserResponse(response);
 }
 
 export async function fetchUserSection({
@@ -42,5 +49,8 @@ export async function fetchUserSection({
     first: quantity,
     userID,
   });
-  return response;
+  if (doc_id === Docs.USER_POSTS) return transformUserPostsResponse(response);
+  else if (doc_id === Docs.USER_RESPONSES)
+    return transformUserResponsesResponse(response);
+  else return transformUserRepostsResponse(response);
 }
