@@ -20,22 +20,31 @@ interface Edge {
 }
 
 interface Node {
-  __typename: string;
+  __typename: NodeTypename;
   id: string;
+}
+
+enum NodeTypename {
+  XDTThread = "XDTThread",
 }
 
 interface TextPostAppThread {
   thread_header_context: null;
   thread_items: ThreadItem[];
-  thread_type: string;
+  thread_type: ThreadType;
   id: string;
 }
 
 interface ThreadItem {
   post: Post;
   reply_facepile_users: ReplyFacepileUser[];
-  line_type: string;
+  line_type: LineType;
   should_show_replies_cta: boolean;
+}
+
+enum LineType {
+  Line = "line",
+  None = "none",
 }
 
 interface Post {
@@ -53,14 +62,14 @@ interface Post {
   image_versions2: ImageVersions2;
   original_height: number;
   original_width: number;
-  video_versions: null;
+  video_versions: PostVideoVersion[] | null;
   caption: Caption;
   like_count: number;
   audio: null;
   caption_is_edited: boolean;
   transcription_data: null;
   accessibility_caption: null | string;
-  has_audio: null;
+  has_audio: boolean | null;
   media_type: number;
   has_liked: boolean;
   caption_add_on: null;
@@ -79,13 +88,13 @@ interface Caption {
 }
 
 interface CarouselMedia {
-  accessibility_caption: string;
+  accessibility_caption: null | string;
   has_audio: null;
   image_versions2: ImageVersions2;
   original_height: number;
   original_width: number;
   pk: string;
-  video_versions: null;
+  video_versions: CarouselMediaVideoVersion[] | null;
   id: string;
   code: null;
 }
@@ -98,6 +107,16 @@ interface Candidate {
   url: string;
   height: number;
   width: number;
+}
+
+interface CarouselMediaVideoVersion {
+  type: number;
+  url: string;
+  __typename: VideoVersionTypename;
+}
+
+enum VideoVersionTypename {
+  XDTVideoVersion = "XDTVideoVersion",
 }
 
 interface GiphyMediaInfo {
@@ -127,7 +146,7 @@ interface TextPostAppInfo {
   direct_reply_count: number;
   repost_count: number;
   hush_info: null;
-  __typename: string;
+  __typename: TextPostAppInfoTypename;
   can_reply: boolean;
   special_effects_enabled_str: string;
   quote_count: number;
@@ -138,13 +157,21 @@ interface TextPostAppInfo {
   post_unavailable_reason: null;
 }
 
+enum TextPostAppInfoTypename {
+  XDTTextPostAppMediaInfo = "XDTTextPostAppMediaInfo",
+}
+
 interface ShareInfo {
   reposted_post: null;
   quoted_post: null;
   can_quote_post: boolean;
   can_repost: boolean;
   is_reposted_by_viewer: boolean;
-  repost_restricted_reason: string;
+  repost_restricted_reason: RepostRestrictedReason;
+}
+
+enum RepostRestrictedReason {
+  Private = "private",
 }
 
 interface TextFragments {
@@ -152,11 +179,33 @@ interface TextFragments {
 }
 
 interface Fragment {
-  fragment_type: string;
-  link_fragment: null;
-  mention_fragment: null;
+  fragment_type: FragmentType;
+  link_fragment: LinkFragment | null;
+  mention_fragment: MentionFragment | null;
   plaintext: string;
   tag_fragment: TagFragment | null;
+}
+
+enum FragmentType {
+  Link = "link",
+  Mention = "mention",
+  Plaintext = "plaintext",
+  TextAppTag = "text_app_tag",
+}
+
+interface LinkFragment {
+  display_text: string;
+  uri: string;
+}
+
+interface MentionFragment {
+  mentioned_user: MentionedUser;
+}
+
+interface MentionedUser {
+  is_active_on_text_post_app: boolean;
+  username: string;
+  id: null;
 }
 
 interface TagFragment {
@@ -194,9 +243,18 @@ interface User {
   text_post_app_is_private: boolean;
 }
 
+interface PostVideoVersion {
+  type: number;
+  url: string;
+}
+
 interface ReplyFacepileUser {
   profile_pic_url: string;
   id: null;
+}
+
+enum ThreadType {
+  Thread = "thread",
 }
 
 interface PageInfo {
