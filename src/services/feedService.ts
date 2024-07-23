@@ -1,7 +1,7 @@
 import threadsClient from "./threadsClient";
 import { Docs } from "../types/threadsClientTypes";
 import type { FeedQuery } from "../types/feedTypes";
-import type { FeedResponse } from "../types/threadsResponses/feedResponseTypes";
+import type { FeedResponse } from "../types/threadsResponses/feedTypes";
 
 function transformResponse(response: FeedResponse) {
   const edges = response.data.feedData.edges;

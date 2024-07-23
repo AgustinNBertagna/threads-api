@@ -1,8 +1,8 @@
 import threadsClient from "./threadsClient";
 import { Docs } from "../types/threadsClientTypes";
 import type { PostsParams } from "../types/postsTypes";
-import type { PostResponse } from "../types/threadsResponses/postResponseTypes";
-import type { RelatedPostsResponse } from "../types/threadsResponses/relatedPostsResponseTypes";
+import type { PostResponse } from "../types/threadsResponses/postTypes";
+import type { RelatedPostsResponse } from "../types/threadsResponses/relatedPostsTypes";
 
 function transformPostResponse(response: PostResponse) {
   const edges = response.data.data.edges;
