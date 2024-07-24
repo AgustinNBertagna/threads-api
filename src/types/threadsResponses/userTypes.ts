@@ -4,7 +4,7 @@ export interface UserResponse {
 }
 
 interface Data {
-  user: User;
+  user: User | null;
 }
 
 interface User {
