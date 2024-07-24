@@ -1,5 +1,5 @@
 import { NotFoundError } from "elysia";
-import { UnauthorizedError } from "../middlewares/errorHandler";
+import { BadRequestError } from "../middlewares/errorHandler";
 import type { UserResponse } from "../types/threadsResponses/userTypes";
 import type { FeedResponse } from "../types/threadsResponses/feedTypes";
 import type { PostResponse } from "../types/threadsResponses/postTypes";
@@ -46,7 +46,8 @@ export function transformUserResponse(response: UserResponse) {
 }
 
 export function transformUserPostsResponse(response: UserPostsResponse) {
-  if (!response.data) throw new UnauthorizedError("User has a private account");
+  if (!response.data)
+    throw new BadRequestError("User not found or user profile is private");
   const edges = response.data.mediaData.edges;
   const posts = edges.map((edge) => edge.node.thread_items[0].post);
   return posts;
@@ -55,7 +56,8 @@ export function transformUserPostsResponse(response: UserPostsResponse) {
 export function transformUserResponsesResponse(
   response: UserResponsesResponse
 ) {
-  if (!response.data) throw new UnauthorizedError("User has a private account");
+  if (!response.data)
+    throw new BadRequestError("User not found or user profile is private");
   const edges = response.data.mediaData.edges;
   const responses = edges.map((edge) =>
     edge.node.thread_items.map((thread) => thread.post)
@@ -64,7 +66,8 @@ export function transformUserResponsesResponse(
 }
 
 export function transformUserRepostsResponse(response: UserRepostsResponse) {
-  if (!response.data) throw new UnauthorizedError("User has a private account");
+  if (!response.data)
+    throw new BadRequestError("User not found or user profile is private");
   const edges = response.data.mediaData.edges;
   const reposts = edges.map((edge) => edge.node.thread_items[0].post);
   return reposts;

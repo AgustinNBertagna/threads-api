@@ -1,15 +1,15 @@
 import { Elysia } from "elysia";
 
-export class UnauthorizedError extends Error {
-  public status: number = 401;
-  public code: string = "UNAUTHORIZED";
+export class BadRequestError extends Error {
+  public status: number = 400;
+  public code: string = "BAD_REQUEST";
   constructor(message?: string) {
     super(message);
   }
 }
 
 export default new Elysia()
-  .error({ UNAUTHORIZED: UnauthorizedError })
+  .error({ BAD_REQUEST: BadRequestError })
   .onError({ as: "global" }, ({ code, error }) => {
     console.log(code);
     const errorMsg = error.message;
@@ -20,7 +20,7 @@ export default new Elysia()
       return { message, status, code };
     }
 
-    if (code === "UNAUTHORIZED") {
+    if (code === "BAD_REQUEST") {
       const { message, status } = error;
       return { message, status, code };
     }
