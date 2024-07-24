@@ -1,5 +1,15 @@
-export interface RelatedPostsResponse {
+export type RelatedPostsResponse =
+  | RelatedPostsResponseOk
+  | RelatedPostsResponseNotOk;
+
+export interface RelatedPostsResponseOk {
   data: Data;
+  extensions: Extensions;
+}
+
+export interface RelatedPostsResponseNotOk {
+  data: null;
+  errors: Error[];
   extensions: Extensions;
 }
 
@@ -224,6 +234,25 @@ export interface VideoVersion {
 export interface ReplyFacepileUser {
   profile_pic_url: string;
   id: null;
+}
+
+interface Error {
+  message: string;
+  severity: string;
+  code: number;
+  api_error_code: number;
+  summary: string;
+  description: string;
+  description_raw: string;
+  is_silent: boolean;
+  is_transient: boolean;
+  is_not_critical: boolean;
+  requires_reauth: boolean;
+  allow_user_retry: boolean;
+  debug_info: null;
+  query_path: null;
+  fbtrace_id: string;
+  www_request_id: string;
 }
 
 export interface Extensions {
