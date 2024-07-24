@@ -1,5 +1,15 @@
-export interface UserResponsesResponse {
+export type UserResponsesResponse =
+  | UserResponsesResponseOk
+  | UserResponsesResponseNotOk;
+
+interface UserResponsesResponseOk {
   data: Data;
+  extensions: Extensions;
+}
+
+interface UserResponsesResponseNotOk {
+  data: null;
+  errors: Error[];
   extensions: Extensions;
 }
 
@@ -221,6 +231,25 @@ interface PageInfo {
 
 interface Viewer {
   user: null;
+}
+
+interface Error {
+  message: string;
+  severity: string;
+  code: number;
+  api_error_code: number;
+  summary: string;
+  description: string;
+  description_raw: string;
+  is_silent: boolean;
+  is_transient: boolean;
+  is_not_critical: boolean;
+  requires_reauth: boolean;
+  allow_user_retry: boolean;
+  debug_info: null;
+  query_path: null;
+  fbtrace_id: string;
+  www_request_id: string;
 }
 
 interface Extensions {
