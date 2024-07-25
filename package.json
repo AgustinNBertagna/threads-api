@@ -3,7 +3,8 @@
   "version": "1.0.50",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
+    "dev": "bun run --watch src/index.ts",
+    "prod": "bun install && bun build ./src/index.ts --outdir ./build --target bun --minify-whitespaces --minify-identifiers && bun ./build/index.js"
   },
   "dependencies": {
     "elysia": "latest"
