@@ -11,7 +11,6 @@ export class BadRequestError extends Error {
 export default new Elysia()
   .error({ BAD_REQUEST: BadRequestError })
   .onError({ as: "global" }, ({ code, error }) => {
-    console.log(code);
     const errorMsg = error.message;
     if (code === "NOT_FOUND") {
       const message =
