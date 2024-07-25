@@ -6,7 +6,7 @@ import {
   transformUserResponse,
   transformUserResponsesResponse,
 } from "./transformResponse";
-import { Docs, DocsKeys } from "../types/threadsClientTypes";
+import { Docs, UserSection } from "../types/threadsClientTypes";
 import type {
   FetchUserOptions,
   fetchUserSearchOptions,
@@ -42,8 +42,14 @@ export async function fetchUserSection({
   userID,
   quantity,
 }: fetchUserSectionOptions) {
-  const key = `USER_${section.toUpperCase()}` as DocsKeys;
-  const doc_id = Docs[key];
+  let doc_id: UserSection;
+  if (section === "posts") {
+    doc_id = Docs.USER_POSTS;
+  } else if (section === "responses") {
+    doc_id = Docs.USER_RESPONSES;
+  } else {
+    doc_id = Docs.USER_REPOSTS;
+  }
   const response = await threadsClient({
     doc_id,
     first: quantity,
