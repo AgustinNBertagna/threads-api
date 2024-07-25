@@ -12,7 +12,10 @@ export enum Docs {
   FEED = "7442991059144077",
 }
 
-export type DocsKeys = "USER_POSTS" | "USER_RESPONSES" | "USER_REPOSTS";
+export type UserSection =
+  | Docs.USER_POSTS
+  | Docs.USER_RESPONSES
+  | Docs.USER_REPOSTS;
 
 interface FeedOptions {
   doc_id: Docs.FEED;
